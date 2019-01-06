@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\gm.api\gm.api.csproj" />
+    <ProjectReference Include="..\gm.Core\gm.Core.csproj" />
+    <ProjectReference Include="..\gm.Data\gm.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MockData\GM_Backend_Coding_Exercise_-_Sample_Data_Report.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

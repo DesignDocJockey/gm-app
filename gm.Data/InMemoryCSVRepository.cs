@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 using gm.api.Core.Commands;
 using gm.api.Core.Models;
 using gm.api.Core.Queries;
+using gm.api.Core.Repository;
+using gm.Core.Services.FieldValidators;
 
-namespace gm.api.Core.Repository
+namespace gm.Data.Repository
 {
     public class InMemoryCSVRepository : ITimesheetRepository
     {
         private string _CSVFilePath;
         private List<Timesheet> _InMemoryTimeSheet;
-
-        private Timesheet MapLineItemToModel(string lineItem) {
-            return new Timesheet();
-        }
 
         public InMemoryCSVRepository(string filePath)
         {
@@ -28,6 +26,7 @@ namespace gm.api.Core.Repository
                                         .ToList()
                                         .Skip(1)
                                         .Select(i => MapLineItemToModel(i))
+                                        .Where(j => j != null)
                                         .ToList();
         }
 
@@ -54,6 +53,43 @@ namespace gm.api.Core.Repository
         public CommandResponse CreateTimeSheet(ITimesheetCommand command)
         {
             throw new NotImplementedException();
+        }
+
+
+        private Timesheet MapLineItemToModel(string lineItem)
+        {
+            if (lineItem.Equals(string.Empty) || lineItem.Equals(",,,,,,,,,,,,,,,,,,"))
+                return null;
+
+            var lineValues = lineItem.Split(',');
+            var timeSheet = new Timesheet();
+            var dateFieldValidator = new DateFieldValidator();
+
+            if (dateFieldValidator.IsValid(lineValues[0]))
+                timeSheet.Date = dateFieldValidator.DateField;
+
+
+        //      public DateTime Date { get; set; }
+        //public string Client { get; set; }
+        //public string Project { get; set; }
+        //public string ProjectCode { get; set; }
+        //public string Task { get; set; }
+        //public float Hours { get; set; }
+        //public int HoursRounded { get; set; }
+        //public bool IsBillable { get; set; }
+        //public bool Invoiced { get; set; }
+        //public bool Approved { get; set; }
+        //public string FirstName { get; set; }
+        //public string LastName { get; set; }
+        //public string Department { get; set; }
+        //public bool IsEmployee { get; set; }
+        //public double BillableRate { get; set; }
+        //public double CostRate { get; set; }
+        //public double CostAmount { get; set; }
+        //public double Currency { get; set; }
+        //public string ExternalReferenceURL { get; set; }
+
+            return new Timesheet();
         }
     }
 }
