@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\gm.Core\gm.Core.csproj" />
+    <ProjectReference Include="..\gm.Data\gm.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data\GM_Backend_Coding_Exercise_-_Sample_Data_Report.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

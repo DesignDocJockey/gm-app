@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using gm.api.Core.Commands;
 using gm.api.Core.Models;
-using gm.api.Core.Queries;
 using gm.api.Core.Repository;
 using gm.Core.Services;
 using gm.Core.Services.FieldValidators;
@@ -41,7 +40,7 @@ namespace gm.Data.Repository
             return _InMemoryTimeSheet.Find(i => i.Uuid.ToString().Equals(timeSheetId.Trim()));
         }
 
-        public IEnumerable<Timesheet> GetTimeSheetByClientId(string clientName)
+        public IEnumerable<Timesheet> GetTimeSheetByClientName(string clientName)
         {
             return _InMemoryTimeSheet.Where(i => i.Client.ToUpper().ToString().Equals(clientName.ToUpper().Trim()));
         }
