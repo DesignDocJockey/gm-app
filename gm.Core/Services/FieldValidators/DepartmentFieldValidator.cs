@@ -1,12 +1,12 @@
 ﻿namespace gm.Core.Services.FieldValidators
 {
-    public class FirstNameFieldValidator : IFieldValidator
+    public class DepartmentFieldValidator : IFieldValidator
     {
-        public string FirstNameField { get; private set; }
+        public string DepartmentField { get; private set; }
         public bool IsFieldValid(string input)
         {
             var isValid = CommonFieldValidator.ValidateStringField(input);
-            FirstNameField = input.Trim();
+            DepartmentField = input.Trim();
             return isValid;
         }
     }

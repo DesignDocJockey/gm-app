@@ -7,6 +7,7 @@ using gm.api.Core.Commands;
 using gm.api.Core.Models;
 using gm.api.Core.Queries;
 using gm.api.Core.Repository;
+using gm.Core.Services;
 using gm.Core.Services.FieldValidators;
 
 namespace gm.Data.Repository
@@ -70,6 +71,9 @@ namespace gm.Data.Repository
             var projCodeValidator = new ProjectCodeFieldValidator();
             var taskFieldValidator = new TaskFieldValdidator();
             var hoursFieldValidator = new HoursFieldValdiator();
+            var nameFieldValidator = new NameFieldValidator();
+            var currencyFieldValidator = new CurrencyFieldValidator();
+            var departmentValidator = new DepartmentFieldValidator();
 
             if (dateFieldValidator.IsFieldValid(lineValues[0]))
                 timeSheet.Date = dateFieldValidator.DateField;
@@ -86,24 +90,42 @@ namespace gm.Data.Repository
             if (taskFieldValidator.IsFieldValid(lineValues[4]))
                 timeSheet.Task = taskFieldValidator.TaskField;
 
-            if (hoursFieldValidator.IsFieldValid(lineValues[5]))
-            {
+            if (hoursFieldValidator.IsFieldValid(lineValues[5])) {
                 timeSheet.Hours = hoursFieldValidator.HoursField;
                 timeSheet.HoursRounded = hoursFieldValidator.HoursRounded;
             }
-            
-            //public bool IsBillable { get; set; }
-            //public bool Invoiced { get; set; }
-            //public bool Approved { get; set; }
-            //public string FirstName { get; set; }
-            //public string LastName { get; set; }
-            //public string Department { get; set; }
-            //public bool IsEmployee { get; set; }
-            //public double BillableRate { get; set; }
-            //public double CostRate { get; set; }
-            //public double CostAmount { get; set; }
-            //public double Currency { get; set; }
-            //public string ExternalReferenceURL { get; set; }
+
+            timeSheet.IsBillable = CommonFieldValidator.ValidateYesNoField(lineValues[7]);
+            timeSheet.Invoiced = CommonFieldValidator.ValidateYesNoField(lineValues[8]);
+            timeSheet.Approved = CommonFieldValidator.ValidateYesNoField(lineValues[9]);
+
+            if (nameFieldValidator.IsFieldValid(lineValues[10])) {
+                timeSheet.FirstName = lineValues[10].Trim();
+            }
+
+            if (nameFieldValidator.IsFieldValid(lineValues[11])) {
+                timeSheet.LastName = lineValues[11].Trim();
+            }
+ 
+            if (departmentValidator.IsFieldValid(lineValues[12])) {
+                timeSheet.Department = lineValues[12].Trim();
+            }
+
+            timeSheet.IsEmployee = CommonFieldValidator.ValidateYesNoField(lineValues[13]);
+
+            CommonFieldValidator.ValidateMonetaryAmount(lineValues[14],  out var billableRate);
+            timeSheet.BillableRate = billableRate;
+
+            CommonFieldValidator.ValidateMonetaryAmount(lineValues[15], out var costRate);
+            timeSheet.CostRate = costRate;
+
+            CommonFieldValidator.ValidateMonetaryAmount(lineValues[16], out var costAmt);
+            timeSheet.CostAmount = costAmt;
+
+            if (currencyFieldValidator.IsFieldValid(lineValues[17]))
+                timeSheet.Currency = currencyFieldValidator.CurrencyField;
+
+            timeSheet.ExternalReferenceURL = string.IsNullOrEmpty(lineValues[18]) ? string.Empty : lineValues[18];
 
             return timeSheet;
         }
