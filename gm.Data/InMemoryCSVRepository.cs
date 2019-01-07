@@ -63,33 +63,49 @@ namespace gm.Data.Repository
 
             var lineValues = lineItem.Split(',');
             var timeSheet = new Timesheet();
-            var dateFieldValidator = new DateFieldValidator();
 
-            if (dateFieldValidator.IsValid(lineValues[0]))
+            var dateFieldValidator = new DateFieldValidator();
+            var clientFieldValidator = new ClientFieldValidator();
+            var projFieldValidator = new ProjectFieldValidator();
+            var projCodeValidator = new ProjectCodeFieldValidator();
+            var taskFieldValidator = new TaskFieldValdidator();
+            var hoursFieldValidator = new HoursFieldValdiator();
+
+            if (dateFieldValidator.IsFieldValid(lineValues[0]))
                 timeSheet.Date = dateFieldValidator.DateField;
 
+            if (clientFieldValidator.IsFieldValid(lineValues[1]))
+                timeSheet.Client = clientFieldValidator.ClientField;
 
-        //      public DateTime Date { get; set; }
-        //public string Client { get; set; }
-        //public string Project { get; set; }
-        //public string ProjectCode { get; set; }
-        //public string Task { get; set; }
-        //public float Hours { get; set; }
-        //public int HoursRounded { get; set; }
-        //public bool IsBillable { get; set; }
-        //public bool Invoiced { get; set; }
-        //public bool Approved { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
-        //public string Department { get; set; }
-        //public bool IsEmployee { get; set; }
-        //public double BillableRate { get; set; }
-        //public double CostRate { get; set; }
-        //public double CostAmount { get; set; }
-        //public double Currency { get; set; }
-        //public string ExternalReferenceURL { get; set; }
+            if (projFieldValidator.IsFieldValid(lineValues[2]))
+                timeSheet.Project = projFieldValidator.ProjectField;
 
-            return new Timesheet();
+            if (projFieldValidator.IsFieldValid(lineValues[3]))
+                timeSheet.ProjectCode = projCodeValidator.ProjectCode;
+
+            if (taskFieldValidator.IsFieldValid(lineValues[4]))
+                timeSheet.Task = taskFieldValidator.TaskField;
+
+            if (hoursFieldValidator.IsFieldValid(lineValues[5]))
+            {
+                timeSheet.Hours = hoursFieldValidator.HoursField;
+                timeSheet.HoursRounded = hoursFieldValidator.HoursRounded;
+            }
+            
+            //public bool IsBillable { get; set; }
+            //public bool Invoiced { get; set; }
+            //public bool Approved { get; set; }
+            //public string FirstName { get; set; }
+            //public string LastName { get; set; }
+            //public string Department { get; set; }
+            //public bool IsEmployee { get; set; }
+            //public double BillableRate { get; set; }
+            //public double CostRate { get; set; }
+            //public double CostAmount { get; set; }
+            //public double Currency { get; set; }
+            //public string ExternalReferenceURL { get; set; }
+
+            return timeSheet;
         }
     }
 }

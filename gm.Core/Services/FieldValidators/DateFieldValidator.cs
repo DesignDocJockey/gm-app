@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace gm.Core.Services.FieldValidators
 {
     public class DateFieldValidator : IFieldValidator
     {
         public DateTime DateField { get; private set; }
-        public bool IsValid(string input)
+        public bool IsFieldValid(string input)
         {
-            throw new NotImplementedException();
+            var isValid = CommonFieldValidator.ValidateStringField(input);
+            if (!isValid)
+                return isValid;
+            else
+            {
+                isValid = DateTime.TryParse(input, out var dateField);
+                if (isValid)
+                    DateField = dateField;
+            }
+
+            return isValid;
         }
     }
 }

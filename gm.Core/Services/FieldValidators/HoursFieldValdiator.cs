@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace gm.Core.Services.FieldValidators
 {
     public class HoursFieldValdiator : IFieldValidator
     {
         public double HoursField { get; private set; }
-        public bool IsValid(string input)
+        public double HoursRounded { get; private set; }
+
+        public bool IsFieldValid(string input)
         {
-            throw new NotImplementedException();
+            var isValid = Double.TryParse(input, out var hrs);
+            if (hrs < 0.0D)
+                isValid = false;
+            else {
+                HoursField = hrs;
+                HoursRounded = Math.Round(HoursField);
+            }
+            return isValid;
+
         }
     }
 }

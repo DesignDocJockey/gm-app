@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace gm.Core.Services.FieldValidators
 {
     public class BillableRateFieldValidator : IFieldValidator
     {
         public decimal BillableRateField { get; private set; }
-        public bool IsValid(string input)
+        public bool IsFieldValid(string input)
         {
             var result = Decimal.TryParse(input, out var amount);
 

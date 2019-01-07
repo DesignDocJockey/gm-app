@@ -1,21 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace gm.api.Core.Models
+namespace gm.Core.Models
 {
-    public class Timesheet : Entity
+    public class TimesheetViewModel
     {
-        public Timesheet()
-        {
-            Uuid = Guid.NewGuid();
-        }
-
         public DateTime Date { get; set; }
         public string Client { get; set; }
         public string Project { get; set; }
         public string ProjectCode { get; set; }
         public string Task { get; set; }
         public double Hours { get; set; }
-        public double HoursRounded {get;set;}
+        public double HoursRounded { get; set; }
         public bool IsBillable { get; set; }
         public bool Invoiced { get; set; }
         public bool Approved { get; set; }
