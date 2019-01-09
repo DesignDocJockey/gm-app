@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using gm.api.Core.Commands;
-using gm.api.Core.Models;
 using gm.api.Core.Repository;
+using gm.Core.Commands;
+using gm.Core.Models;
 using gm.Core.Services;
 using gm.Core.Services.FieldValidators;
 

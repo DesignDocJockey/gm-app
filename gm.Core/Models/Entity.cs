@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace gm.api.Core.Models
+namespace gm.Core.Models
 {
     public abstract class Entity
     {

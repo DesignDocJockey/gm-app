@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using gm.api.Core.Commands;
-using gm.api.Core.Models;
+using gm.Core.Commands;
+using gm.Core.Models;
 using System.Linq;
 using System.Threading.Tasks;
 

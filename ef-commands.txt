@@ -1,0 +1,5 @@
+add-migration initial (initalizes the migrations & creates the migrations folder)
+
+script-migration (creates the t-sql scripts)
+
+update-database -verbose (creates the database specified in the connection string in the Context.cs file and adds the migrations specified)
