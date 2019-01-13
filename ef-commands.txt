@@ -1,3 +1,22 @@
+
+
+In Data Project containing the EF-Context, add the following Nuget Package References:
+Microsoft.EntityFrameworkCore.Tools
+DataProvider Speicific EntityFrameworkCore Package 
+(i.e MicrosoftEntityFrameworkCore.SqlServer for SQL Server)
+
+In the App/Start Up Project
+Add the following Nuget Package References:
+Microsoft.EntityFrameworkCore.Design
+
+To Run the Migrations:
+1. Go to the Package Manager Console
+2. Select the default project as the Data Project containing the Context objects
+
+localDB Connection String: Data Source=(localdb)\mssqllocaldb;Initial Catalog=TimeSheetData;Integrated Security=True
+ 
+dbContextOptionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeSheetData;Trusted_Connection=True;");
+
 add-migration initial (initalizes the migrations & creates the migrations folder)
 
 script-migration (creates the t-sql scripts)

@@ -6,6 +6,7 @@ namespace gm.Core.Models
 {
     public class TimesheetViewModel
     {
+        public Guid Uuid { get; set; }
         public DateTime Date { get; set; }
         public string Client { get; set; }
         public string Project { get; set; }

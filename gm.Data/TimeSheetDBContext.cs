@@ -9,11 +9,15 @@ namespace gm.Data
     public class TimeSheetDBContext : DbContext
     {
         public DbSet<TimesheetDataModel> TimeSheets { get; set; }
+        private string _ConnectionString;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
-        {
-            dbContextOptionsBuilder.UseSqlServer(
-                "Server=(localdb)\\mssqllocaldb;Database=TimeSheetData;Trusted_Connection=True;");
-        }
+        public TimeSheetDBContext(DbContextOptions<TimeSheetDBContext> options)
+            :base(options)
+        { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
+        //{
+        //    dbContextOptionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeSheetData;Trusted_Connection=True;");
+        //}
     }
 }
