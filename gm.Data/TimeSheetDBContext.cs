@@ -15,6 +15,13 @@ namespace gm.Data
             :base(options)
         { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<TimesheetDataModel>()
+            //    .Property(p => p.Id)
+            //    .ValueGeneratedOnAdd();
+        }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         //{
         //    dbContextOptionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeSheetData;Trusted_Connection=True;");

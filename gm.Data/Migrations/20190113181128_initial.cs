@@ -16,7 +16,7 @@ namespace gm.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
-                    Client = table.Column<string>(nullable: true),
+                    Client = table.Column<string>(maxLength: 255, nullable: false),
                     Project = table.Column<string>(nullable: true),
                     ProjectCode = table.Column<string>(nullable: true),
                     Task = table.Column<string>(nullable: true),

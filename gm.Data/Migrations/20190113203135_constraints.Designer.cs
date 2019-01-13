@@ -10,8 +10,8 @@ using gm.Data;
 namespace gm.Data.Migrations
 {
     [DbContext(typeof(TimeSheetDBContext))]
-    [Migration("20190109043643_initial")]
-    partial class initial
+    [Migration("20190113203135_constraints")]
+    partial class constraints
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,9 @@ namespace gm.Data.Migrations
 
                     b.Property<decimal>("BillableRate");
 
-                    b.Property<string>("Client");
+                    b.Property<string>("Client")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<decimal>("CostAmount");
 
@@ -45,7 +47,9 @@ namespace gm.Data.Migrations
 
                     b.Property<string>("ExternalReferenceURL");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<double>("Hours");
 
@@ -57,13 +61,21 @@ namespace gm.Data.Migrations
 
                     b.Property<bool>("IsEmployee");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
-                    b.Property<string>("Project");
+                    b.Property<string>("Project")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
-                    b.Property<string>("ProjectCode");
+                    b.Property<string>("ProjectCode")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
-                    b.Property<string>("Task");
+                    b.Property<string>("Task")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<Guid>("Uuid");
 

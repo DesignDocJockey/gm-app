@@ -11,7 +11,7 @@ namespace gm.Tests
     public class RepositoryTests
     {
         [Fact]
-        public void ItGetsDataFromACSVFile()
+        public void ItGetsDataFromACsvFile()
         {
             var appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var filePath = Path.Combine(appPath, "MockData\\GM_Backend_Coding_Exercise_-_Sample_Data_Report.csv");

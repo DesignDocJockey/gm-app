@@ -14,7 +14,7 @@ namespace gm.Data.Repository
     public class InMemoryCSVRepository : ITimesheetRepository
     {
         private string _CSVFilePath;
-        private List<Timesheet> _InMemoryTimeSheet;
+        private List<TimesheetDataModel> _InMemoryTimeSheet;
 
         public InMemoryCSVRepository(string filePath)
         {
@@ -30,9 +30,9 @@ namespace gm.Data.Repository
                                         .ToList();
         }
 
-        public IEnumerable<Timesheet> GetAllTimeSheets() => _InMemoryTimeSheet;
+        public IEnumerable<TimesheetDataModel> GetAllTimeSheets() => _InMemoryTimeSheet;
 
-        public Timesheet GetTimeSheetById(string timeSheetId)
+        public TimesheetDataModel GetTimeSheetById(string timeSheetId)
         {
             if (!_InMemoryTimeSheet.Any(i => i.Uuid.ToString().Equals(timeSheetId.Trim())))
                 return null;
@@ -40,7 +40,7 @@ namespace gm.Data.Repository
             return _InMemoryTimeSheet.Find(i => i.Uuid.ToString().Equals(timeSheetId.Trim()));
         }
 
-        public IEnumerable<Timesheet> GetTimeSheetByClientName(string clientName)
+        public IEnumerable<TimesheetDataModel> GetTimeSheetByClientName(string clientName)
         {
             return _InMemoryTimeSheet.Where(i => i.Client.ToUpper().ToString().Equals(clientName.ToUpper().Trim()));
         }
@@ -56,13 +56,13 @@ namespace gm.Data.Repository
         }
 
 
-        private Timesheet MapLineItemToModel(string lineItem)
+        private TimesheetDataModel MapLineItemToModel(string lineItem)
         {
             if (lineItem.Equals(string.Empty) || lineItem.Equals(",,,,,,,,,,,,,,,,,,"))
                 return null;
 
             var lineValues = lineItem.Split(',');
-            var timeSheet = new Timesheet();
+            var timeSheet = new TimesheetDataModel();
 
             var dateFieldValidator = new DateFieldValidator();
             var clientFieldValidator = new ClientFieldValidator();

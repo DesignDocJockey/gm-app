@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gm.Data;
 
 namespace gm.Data.Migrations
 {
     [DbContext(typeof(TimeSheetDBContext))]
-    partial class TimeSheetDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190113182949_add-constraints-1")]
+    partial class addconstraints1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,7 @@ namespace gm.Data.Migrations
 
                     b.Property<string>("ExternalReferenceURL");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("FirstName");
 
                     b.Property<double>("Hours");
 
@@ -59,9 +59,7 @@ namespace gm.Data.Migrations
 
                     b.Property<bool>("IsEmployee");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("LastName");
 
                     b.Property<string>("Project")
                         .IsRequired()

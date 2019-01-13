@@ -9,9 +9,9 @@ namespace gm.api.Core.Repository
 {
     public interface ITimesheetRepository
     {
-        IEnumerable<Timesheet> GetAllTimeSheets();
-        Timesheet GetTimeSheetById(string timeSheetId);
-        IEnumerable<Timesheet> GetTimeSheetByClientName(string clientName);
+        IEnumerable<TimesheetDataModel> GetAllTimeSheets();
+        TimesheetDataModel GetTimeSheetById(string timeSheetId);
+        IEnumerable<TimesheetDataModel> GetTimeSheetByClientName(string clientName);
         CommandResponse CreateTimeSheet(ITimesheetCommand command);
         CommandResponse UpdateTimeSheet(ITimesheetCommand command);
     }
