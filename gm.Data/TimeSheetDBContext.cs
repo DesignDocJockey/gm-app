@@ -9,8 +9,7 @@ namespace gm.Data
     public class TimeSheetDBContext : DbContext
     {
         public DbSet<TimesheetDataModel> TimeSheets { get; set; }
-        private string _ConnectionString;
-
+     
         public TimeSheetDBContext(DbContextOptions<TimeSheetDBContext> options)
             :base(options)
         { }

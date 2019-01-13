@@ -20,4 +20,10 @@
     <ProjectReference Include="..\gm.Core\gm.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\GM_Backend_Coding_Exercise_-_Sample_Data_Report.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

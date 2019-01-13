@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gm.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gm.api.Controllers
@@ -10,6 +11,12 @@ namespace gm.api.Controllers
     [ApiController]
     public class TimesheetsController : ControllerBase
     {
+        private readonly TimeSheetDBContext _TimeSheetContext;
+
+        public TimesheetsController(TimeSheetDBContext ctx) {
+            _TimeSheetContext = ctx;
+        }
+
         // GET api/timesheets
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

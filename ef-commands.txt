@@ -27,3 +27,4 @@ update-database -verbose (creates the database specified in the connection strin
 remove-migration
 
 add-migration initial-constraints
+add-migration constraints
