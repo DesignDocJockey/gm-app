@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using gm.Data;
 using Microsoft.EntityFrameworkCore;
+using gm.api.Core.Repository;
+using AutoMapper;
 
 namespace gm.api
 {
@@ -28,9 +30,9 @@ namespace gm.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<TimeSheetDBContext>(
-                                        options => options.UseSqlServer(Configuration.GetConnectionString("TimeSheetDBConnetionString"))
-                                    );
+            services.AddAutoMapper();
+            services.AddDbContext<TimeSheetDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TimeSheetDBConnetionString")));
+            services.AddScoped<ITimesheetRepository, TimesheetRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

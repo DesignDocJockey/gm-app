@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using gm.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,15 +13,25 @@ namespace gm.api.Controllers
     public class TimesheetsController : ControllerBase
     {
         private readonly TimeSheetDBContext _TimeSheetContext;
+        private readonly IMapper _AutoMapper;
 
-        public TimesheetsController(TimeSheetDBContext ctx) {
+        public TimesheetsController(TimeSheetDBContext ctx, IMapper mapper)
+        {
+
+            //_TimeSheetContext = booksRepository
+            //   ?? throw new ArgumentNullException(nameof(booksRepository));
+            //_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+
             _TimeSheetContext = ctx;
+            _AutoMapper = mapper;
         }
 
         // GET api/timesheets
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            var tsheets = _TimeSheetContext.TimeSheets;
+
             return new string[] { "value1", "value2" };
         }
 
