@@ -18,13 +18,12 @@ namespace gm.Data.Migrations
             var repo = new InMemoryCSVRepository(filePath);
             var records = repo.GetAllTimeSheets();
 
-            foreach (var r in records)
-            {
-                var insertSQL = new StringBuilder();
-                insertSQL.Append("INSERT INTO dbo.TimeSheets([Uuid], [Date], [Client], [Project], [ProjectCode], [Task], [Hours], [HoursRounded], [IsBillable], [Invoiced], [Approved],  [FirstName] ,[LastName], [Department], [IsEmployee] , [BillableRate], [CostRate], [CostAmount], [Currency], [ExternalReferenceURL] )");
-                insertSQL.Append($"VALUES({ Guid.NewGuid()}, {r.Date}, {r.Client}, {r.Project}, {r.ProjectCode}, {r.Task}, {r.Hours}, {r.HoursRounded}, {r.IsBillable}, {r.Invoiced}, {r.Approved}, {r.FirstName}, {r.LastName}, {r.Department}, {r.IsEmployee}, {r.BillableRate}, {r.CostRate}, {r.CostAmount}, {r.Currency}, {r.ExternalReferenceURL}");
-                migrationBuilder.Sql(insertSQL.ToString());
-            }
+            var r = records.FirstOrDefault();
+           
+            var insertSQL = new StringBuilder();
+            insertSQL.Append("INSERT INTO dbo.TimeSheets([Uuid], [Date], [Client], [Project], [ProjectCode], [Task], [Hours], [HoursRounded], [IsBillable], [Invoiced], [Approved],  [FirstName] ,[LastName], [Department], [IsEmployee] , [BillableRate], [CostRate], [CostAmount], [Currency], [ExternalReferenceURL])");
+            insertSQL.Append($" VALUES ( '{Guid.NewGuid()}', '{r.Date}', '{r.Client}', '{r.Project}', '{r.ProjectCode}', '{r.Task}', {r.Hours}, {r.HoursRounded}, '{r.IsBillable}', '{r.Invoiced}', '{r.Approved}', '{r.FirstName}', '{r.LastName}', '{r.Department}', '{r.IsEmployee}', {r.BillableRate}, {r.CostRate}, {r.CostAmount}, '{r.Currency}', '{r.ExternalReferenceURL}');");
+            migrationBuilder.Sql(insertSQL.ToString());
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

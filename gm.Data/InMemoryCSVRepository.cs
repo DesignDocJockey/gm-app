@@ -83,7 +83,7 @@ namespace gm.Data.Repository
             if (projFieldValidator.IsFieldValid(lineValues[2]))
                 timeSheet.Project = projFieldValidator.ProjectField;
 
-            if (projFieldValidator.IsFieldValid(lineValues[3]))
+            if (projCodeValidator.IsFieldValid(lineValues[3]))
                 timeSheet.ProjectCode = projCodeValidator.ProjectCode;
 
             if (taskFieldValidator.IsFieldValid(lineValues[4]))

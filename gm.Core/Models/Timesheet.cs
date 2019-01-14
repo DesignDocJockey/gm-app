@@ -5,9 +5,7 @@ namespace gm.Core.Models
     public class Timesheet : Entity
     {
         public Timesheet()
-        {
-            Uuid = Guid.NewGuid();
-        }
+        { }
 
         public DateTime Date { get; set; }
         public string Client { get; set; }

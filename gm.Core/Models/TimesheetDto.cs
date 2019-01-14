@@ -4,7 +4,7 @@ using System.Text;
 
 namespace gm.Core.Models
 {
-    public class TimesheetViewModel
+    public class TimesheetDto
     {
         public Guid Uuid { get; set; }
         public DateTime Date { get; set; }

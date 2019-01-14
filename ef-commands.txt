@@ -1,4 +1,4 @@
-
+(LocalDb)\MSSQLLocalDB
 
 In Data Project containing the EF-Context, add the following Nuget Package References:
 Microsoft.EntityFrameworkCore.Tools
@@ -28,3 +28,21 @@ remove-migration
 
 add-migration initial-constraints
 add-migration constraints
+
+/*
+https://www.learnentityframeworkcore.com/migrations
+
+INSERT INTO dbo.TimeSheets([Uuid], [Date], [Client], [Project], [ProjectCode], [Task], [Hours], [HoursRounded], [IsBillable], [Invoiced], [Approved],  [FirstName] ,[LastName], [Department], [IsEmployee] , [BillableRate], [CostRate], [CostAmount], [Currency]) 
+VALUES ('503a6bde-d64b-488e-be1d-16f1b99b6c73', '4/3/2017 12:00:00 AM', 'Twitri', 'CLOB Rearchitecture', 'BGC001', 'Project Management', 6.26, 6, 1, 1, 1, 'Walter', 'Silva', 'Product', 1, 50, 0, 0, 'United States Dollar - USD' )
+
+select *
+from [dbo].[TimeSheets]
+
+truncate table [dbo].[TimeSheets]
+
+select *
+from [dbo].[__EFMigrationsHistory]
+
+delete  [dbo].[__EFMigrationsHistory]
+where MigrationId = '20190113203902_seed-db'
+*/
