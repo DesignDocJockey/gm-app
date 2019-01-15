@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using gm.api.Core.Repository;
+using gm.Core.Models;
 using gm.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,27 +14,22 @@ namespace gm.api.Controllers
     [ApiController]
     public class TimesheetsController : ControllerBase
     {
-        private readonly TimeSheetDBContext _TimeSheetContext;
+        private readonly ITimesheetRepository _TimesheetRepository;
         private readonly IMapper _AutoMapper;
 
-        public TimesheetsController(TimeSheetDBContext ctx, IMapper mapper)
+        public TimesheetsController(ITimesheetRepository timeSheetRepository, IMapper mapper)
         {
-
-            //_TimeSheetContext = booksRepository
-            //   ?? throw new ArgumentNullException(nameof(booksRepository));
-            //_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-
-            _TimeSheetContext = ctx;
-            _AutoMapper = mapper;
+            _TimesheetRepository = timeSheetRepository ?? throw new ArgumentNullException(nameof(timeSheetRepository));
+            _AutoMapper = mapper ?? throw new ArgumentNullException(nameof(mapper)); ;
         }
 
         // GET api/timesheets
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<TimesheetDto>> Get()
         {
-            var tsheets = _TimeSheetContext.TimeSheets;
-
-            return new string[] { "value1", "value2" };
+            var tsheets = _TimesheetRepository.GetAllTimeSheets();
+            var timeSheets = _AutoMapper.Map<IEnumerable<TimesheetDto>>(tsheets);
+            return Ok(timeSheets);
         }
 
         // GET api/timesheets/{guid}
@@ -52,15 +49,35 @@ namespace gm.api.Controllers
 
         // POST api/timesheets
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] TimesheetDto newTimeSheet)
         {
+            if (newTimeSheet == null)
+            {
+                return BadRequest();
+            }
+
+            //if (pointOfInterest.Description == pointOfInterest.Name)
+            //{
+            //    ModelState.AddModelError("Description", "The provided description should be different from the name.");
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
         }
 
         // PUT api/timesheets/{guid}
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] TimesheetDto timesheetToUpdate)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok();
         }
-
     }
 }

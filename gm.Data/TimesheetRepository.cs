@@ -1,10 +1,10 @@
 ﻿using gm.api.Core.Repository;
 using gm.Core.Commands;
-using gm.Core.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using gm.Core.Models;
 
 namespace gm.Data
 {
@@ -21,20 +21,15 @@ namespace gm.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TimesheetDataModel> GetAllTimeSheets()
-        {
-            return _TimeSheetDbCtx.TimeSheets;
-        }
+        public IEnumerable<TimesheetDataModel> GetAllTimeSheets() => _TimeSheetDbCtx.TimeSheets.ToList();
 
         public IEnumerable<TimesheetDataModel> GetTimeSheetByClientName(string clientName)
         {
             throw new NotImplementedException();
         }
 
-        public TimesheetDataModel GetTimeSheetById(string timeSheetId)
-        {
-            throw new NotImplementedException();
-        }
+        public TimesheetDataModel GetTimeSheetById(string timeSheetUuid) => _TimeSheetDbCtx.TimeSheets.FirstOrDefault(i => i.Uuid.ToString().ToLower().Equals(timeSheetUuid.ToLower()));
+        
 
         public CommandResponse UpdateTimeSheet(ITimesheetCommand command)
         {
